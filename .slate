@@ -1,0 +1,55 @@
+alias mon-laptop 0
+alias mon-ekstern 1
+alias mon-ekstern-2 2
+ 
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+ 
+# Push Bindings
+bind right:ctrl,alt   chain push right bar-resize:screenSizeX/2 | resize +0 -50% top-right | push down
+bind left:ctrl,alt   chain push left  bar-resize:screenSizeX/2 | resize +0 -50% top-left | push down
+bind up:ctrl,alt   chain push up bar-resize:screenSizeY/2 | resize -50% +0 top-right | push left
+bind down:ctrl,alt   chain push down bar-resize:screenSizeY/2 | resize -50% +0 bottom-left | push right
+ 
+bind .:ctrl,alt   chain push right bar-resize:screenSizeX/3 | push right bar-resize:(screenSizeX*2/3)
+bind ,:ctrl,alt   chain push left  bar-resize:screenSizeX/3 | push left bar-resize:(screenSizeX*2/3)
+
+# Resize Bindings
+bind right:alt,z       resize +10% +0
+bind left:alt,z        resize -10% +0
+bind up:alt,z          resize +0   -10%
+bind down:alt,z        resize +0   +10%
+bind right:shift,alt  resize -10% +0 bottom-right
+bind left:shift,alt   resize +10% +0 bottom-right
+bind up:shift,alt     resize +0   +10% bottom-right
+bind down:shift,alt   resize +0   -10% bottom-right
+ 
+# Throw Bindings
+bind s:d,ctrl,shift,cmd throw right resize
+bind h:d,ctrl,shift,cmd throw left  resize
+bind n:d,ctrl,shift,cmd throw up    resize
+bind t:d,ctrl,shift,cmd throw down  resize
+
+# Window Hints
+bind esc:cmd hint
+
+alias hyper ctrl,alt,cmd
+
+# App bindings
+bind g:${hyper} focus 'Google Chrome'
+bind t:${hyper} focus 'Sublime Text'
+bind x:${hyper} focus 'Xcode'
+bind m:${hyper} focus 'Mail'
+bind i:${hyper} focus 'iTerm'
+bind l:${hyper} focus 'IntelliJ IDEA 14'
+bind p:${hyper} focus 'MySQLWorkbench'
+
+# Move to external
+alias 1-full        move screenOriginX;screenOriginY screenSizeX;screenSizeY         ${mon-laptop}
+alias 2-full        move screenOriginX;screenOriginY screenSizeX;screenSizeY       ${mon-ekstern}
+alias 3-full        move screenOriginX;screenOriginY screenSizeX;screenSizeY       ${mon-ekstern-2}
+ 
+bind 1:alt,cmd ${1-full}
+bind 2:alt,cmd ${2-full}
+bind 3:alt,cmd ${3-full}
